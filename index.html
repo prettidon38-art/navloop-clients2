@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>NAVLOOP CLIENTS — Demo</title>
+<style>
+:root{--bg:#08080a;--card:#121216;--line:#26262d;--red:#ff2d46;--blue:#5aa9ff;--ink:#fff;--mut:#9a9aa5;--ok:#4cd08a;--warn:#ffb347;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+*{box-sizing:border-box}h1,h2,h3{margin:0;letter-spacing:-.01em}button,input,select,textarea{font:inherit;color:inherit}
+.demo{background:#1a0b0e;color:#ff8d9b;text-align:center;font-size:12px;padding:6px 10px;border-bottom:1px solid #3a1118}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(8,8,10,.95);border-bottom:1px solid var(--line);padding:10px 14px}
+.hd{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.logo{display:flex;align-items:center;gap:9px;cursor:pointer;font-weight:800;letter-spacing:.16em;font-size:15px}.logo i{font-style:normal;color:var(--red);font-size:10px;display:block;letter-spacing:.38em}
+nav{display:flex;gap:4px;overflow-x:auto;flex:1 1 100%;scrollbar-width:none}@media(min-width:820px){nav{flex:1 1 auto;justify-content:flex-end}}
+nav button{background:none;border:0;padding:7px 12px;border-radius:8px;color:var(--mut);cursor:pointer;white-space:nowrap}
+nav .on{color:#fff;background:#1c1c22;box-shadow:inset 0 -2px var(--red)}
+main{max-width:1080px;margin:0 auto;padding:16px 14px 40px}
+.hero{border:1px solid var(--line);border-radius:18px;padding:26px 18px;background:radial-gradient(circle at 85% 0,rgba(255,45,70,.28),transparent 55%),radial-gradient(circle at 0 100%,rgba(90,169,255,.14),transparent 50%),var(--card);margin-bottom:18px}
+.hero h1{font-size:clamp(28px,7vw,48px);line-height:1.1;max-width:14em}.hero h1 b{color:var(--red)}.hero p{color:var(--mut);max-width:34em}
+.tl{height:34px;margin:18px 0 4px;border-radius:6px;position:relative;background:repeating-linear-gradient(90deg,#1d1d24 0 46px,#101014 46px 50px);border:1px solid var(--line)}
+.tl::after{content:"";position:absolute;left:62%;top:-6px;bottom:-6px;width:2px;background:var(--blue);box-shadow:0 0 10px var(--blue)}
+.sb{display:flex;gap:8px;margin:14px 0}.sb input{flex:1}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#0d0d10;min-width:0}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-offset:-1px}
+.btn{border:1px solid var(--line);background:#1a1a20;border-radius:10px;padding:9px 16px;cursor:pointer;text-decoration:none;display:inline-block;color:#fff}
+.btn.red{background:var(--red);border-color:var(--red);font-weight:700}.btn.s{padding:4px 10px;font-size:13px}.btn[disabled]{opacity:.5;cursor:not-allowed}
+.sec{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}.cats{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.card,.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.card{cursor:pointer}.card:hover{border-color:var(--red)}
+.cat{font-weight:600;border-left:3px solid var(--red)}
+.av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--red),#7a0f1f);flex:none}.av.l{width:84px;height:84px;font-size:28px}
+.r{display:flex;gap:12px;align-items:center}.mut{color:var(--mut)}.sp{justify-content:space-between}
+.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:99px;background:#1c1c24;color:#b9c7ff;margin:4px 4px 0 0}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px}.chip{white-space:nowrap;border:1px solid var(--line);background:none;border-radius:99px;padding:6px 13px;cursor:pointer}.chip.on{background:var(--red);border-color:var(--red)}
+.filt{display:grid;gap:8px;grid-template-columns:1fr 1fr}.filt .w{grid-column:1/-1}@media(min-width:820px){.filt{grid-template-columns:2fr 1fr 1fr}.filt .w{grid-column:auto}}
+.f{display:block;margin-top:10px}.f span{display:block;font-size:13px;color:var(--mut);margin-bottom:3px}.f em{color:#ff7d8c;font-size:12px;font-style:normal}
+.two{display:grid;gap:12px}@media(min-width:820px){.two{grid-template-columns:1fr 1fr}.pf{grid-template-columns:260px 1fr}}.pf{display:grid;gap:14px}
+.port{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.clip{aspect-ratio:16/9;border-radius:10px;border:1px solid var(--line);background:linear-gradient(135deg,#1b1b24,#2a0d13);display:grid;place-items:center;color:var(--blue);font-size:26px;position:relative}.clip small{position:absolute;bottom:6px;left:8px;color:var(--mut);font-size:11px}
+.row{display:flex;gap:10px;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}.row:last-child{border:0}
+.pill{font-size:12px;padding:2px 10px;border-radius:99px;border:1px solid currentColor}.g{color:var(--ok)}.o{color:var(--warn)}.b{color:var(--blue)}.x{color:#ff7d8c}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:10px 0}.stats b{font-size:24px;display:block}
+.note{font-size:12px;color:var(--mut);border:1px dashed #3a3a45;border-radius:10px;padding:8px 10px;margin:8px 0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--blue);color:#001;padding:10px 16px;border-radius:10px;z-index:20;font-weight:600}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:20px}
+</style></head><body><div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script>
+const {useState}=React,html=htm.bind(React.createElement);
+/* ===== 1. CONFIG — the ONLY place contact links live. Paste your own https:// or mailto: links here. =====
+   Example: fallbackContact:"https://wa.me/91XXXXXXXXXX"  or  contactLinks:{e1:"mailto:you@example.com"}  */
+const CONFIG={fallbackContact:"",contactLinks:{}};
+/* ===== 2. DEMO DATA (fake people, fake projects — resets on refresh, shared with nobody) ===== */
+const CATS=["Reels & Shorts","YouTube","Wedding","Corporate Ads","Music Video","Motion Graphics"];
+const BANDS=[["Any price",0,1e9],["Under ₹1,000",0,999],["₹1,000 – ₹3,000",1000,3000],["₹3,001 – ₹6,000",3001,6000],["Above ₹6,000",6001,1e9]];
+const mkE=([id,name,city,cat,sk,price,days,rating,avail,status])=>({id,name,city,cat,skills:sk.split("|"),price,days,rating,avail,status,pf:[0,1,2].map(i=>({t:cat+" sample "+(i+1),u:""}))});
+const E0=[["e1","Aarav Mehta","Mumbai","Reels & Shorts","Premiere Pro|CapCut|Color grading",800,2,4.8,"Available","approved"],["e2","Sneha Iyer","Bengaluru","YouTube","DaVinci Resolve|Storytelling|Subtitles",2500,4,4.9,"Available","approved"],["e3","Rahul Verma","Delhi","Wedding","Cinematic edit|Highlights|Color grading",6000,7,4.7,"Busy","approved"],["e4","Kavya Nair","Kochi","Music Video","After Effects|VFX|Beat sync",4500,6,4.6,"Available","approved"],["e5","Imran Shaikh","Pune","Corporate Ads","Premiere Pro|Motion titles|Sound design",3500,5,4.5,"Available","approved"],["e6","Diya Kapoor","Jaipur","Motion Graphics","After Effects|Logo animation|Lottie",3000,5,4.8,"Busy","approved"],["e7","Vikram Joshi","Ahmedabad","Reels & Shorts","CapCut|Subtitles|Trend edits",500,1,4.4,"Available","approved"],["e8","Tanya Bose","Kolkata","YouTube","Premiere Pro|Thumbnails|Podcast edit",1800,3,4.7,"Available","pending"]].map(mkE);
+const P0=[{id:"j1",t:"30 Instagram Reels for a cafe",type:"Reels & Shorts",budget:6000,dl:"2026-11-15",d:"Trim and caption 30 short clips with our brand colours.",st:"Open",rv:"approved"},{id:"j2",t:"Weekly vlog editing (4 videos)",type:"YouTube",budget:8000,dl:"2026-11-30",d:"Jump cuts, music, subtitles and thumbnails for travel vlogs.",st:"In discussion",rv:"approved"},{id:"j3",t:"Wedding highlight film, 5 minutes",type:"Wedding",budget:12000,dl:"2026-12-10",d:"Cinematic highlight from 3 hours of footage, warm colour grade.",st:"Hired",rv:"approved"},{id:"j4",t:"Product launch ad, 30 seconds",type:"Corporate Ads",budget:4500,dl:"2026-11-05",d:"Energetic ad with kinetic text and sound design for a gadget.",st:"Completed",rv:"pending"}];
+const N0=[{id:"n1",e:"e2",t:"Weekly vlog editing (4 videos)",st:"Replied"},{id:"n2",e:"e3",t:"Wedding highlight film, 5 minutes",st:"Accepted"},{id:"n3",e:"e1",t:"30 Instagram Reels for a cafe",st:"Sent"},{id:"n4",e:"e6",t:"Logo sting for a podcast",st:"Declined"}];
+const R0=[{id:"r1",about:"Tanya Bose (profile)",why:"Portfolio looks copied (demo report)",st:"Open"},{id:"r2",about:"Job: Product launch ad",why:"Budget seems unrealistic (demo report)",st:"Open"},{id:"r3",about:"Imran Shaikh (profile)",why:"Wrong city listed (demo report)",st:"Open"}];
+/* ===== 3. HELPERS ===== */
+const inr=n=>"₹"+Number(n).toLocaleString("en-IN"),ini=n=>n.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase(),okUrl=u=>/^(https:\/\/|mailto:)\S+$/i.test(u||"");
+const SC={Open:"b","In discussion":"o",Hired:"g",Completed:"g",Sent:"b",Replied:"o",Accepted:"g",Declined:"x",approved:"g",pending:"o",suspended:"x",removed:"x",Available:"g",Busy:"o"};
+const Pill=({s,l})=>html`<span class=${"pill "+(SC[s]||"")}>${l||s}</span>`;
+const Fld=({l,err,children})=>html`<label class="f"><span>${l}</span>${children}${err&&html`<em>${err}</em>`}</label>`;
+const Logo=({go})=>html`<div class="logo" onClick=${go}><svg width="38" height="38" viewBox="0 0 40 40" aria-label="NE logo"><rect x="1" y="1" width="38" height="38" rx="9" fill="#0d0d10" stroke="#ff2d46" stroke-width="2"/><path d="M9 30V10l12 20V10" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><path d="M21 10h10M21 20h8M21 30h10" stroke="#ff2d46" stroke-width="4"/><path d="M26 4v32" stroke="#5aa9ff" stroke-width="1.5" opacity=".9"/></svg><div>NAVLOOP<i>CLIENTS</i></div></div>`;
+const Contact=({id})=>{const u=CONFIG.contactLinks[id]||CONFIG.fallbackContact;return okUrl(u)?html`<a class="btn red" href=${u} target="_blank" rel="noopener noreferrer">Contact editor</a>`:html`<button class="btn" disabled>Contact (link not configured)</button>`};
+const ECard=({e,open})=>html`<div class="card" onClick=${open}><div class="r"><div class="av">${ini(e.name)}</div><div><b>${e.name}</b><div class="mut">${e.cat} · ${e.city}</div></div></div><div>${e.skills.map(s=>html`<span class="tag" key=${s}>${s}</span>`)}</div><div class="r sp" style=${{marginTop:10}}><span>From <b>${inr(e.price)}</b> · ${e.days}d</span><span>★ ${e.rating} <${Pill} s=${e.avail}/></span></div></div>`;
+/* ===== 4. FORMS (validated) ===== */
+function PostForm({onDone}){
+ const [f,setF]=useState({t:"",type:"",budget:"",dl:"",d:""}),[er,setEr]=useState({}),set=k=>e=>setF({...f,[k]:e.target.value}),today=new Date().toISOString().slice(0,10);
+ const go=()=>{const e={};if(f.t.trim().length<4)e.t="Enter a title (4+ characters).";if(!f.type)e.type="Choose an editing type.";if(!(+f.budget>=100))e.budget="Budget must be at least ₹100.";if(!f.dl||f.dl<today)e.dl="Pick today or a later date.";if(f.d.trim().length<20)e.d="Describe the project (20+ characters).";setEr(e);if(!Object.keys(e).length)onDone({...f,t:f.t.trim(),budget:+f.budget,d:f.d.trim()})};
+ return html`<div class="box"><${Fld} l="Project title" err=${er.t}><input value=${f.t} onInput=${set("t")}/><//><${Fld} l="Editing type" err=${er.type}><select value=${f.type} onChange=${set("type")}><option value="">Choose…</option>${CATS.map(c=>html`<option key=${c}>${c}</option>`)}</select><//>
+ <div class="two"><${Fld} l="Budget (₹)" err=${er.budget}><input type="number" inputmode="numeric" value=${f.budget} onInput=${set("budget")}/><//><${Fld} l="Deadline" err=${er.dl}><input type="date" value=${f.dl} onInput=${set("dl")}/><//></div>
+ <${Fld} l="Project description" err=${er.d}><textarea rows="5" value=${f.d} onInput=${set("d")}></textarea><//><p><button class="btn red" onClick=${go}>Post project (demo)</button></p></div>`;
+}
+function EditForm({e,onSave}){
+ const [f,setF]=useState({name:e.name,city:e.city,cat:e.cat,skills:e.skills.join(", "),price:e.price,days:e.days,avail:e.avail,pf:e.pf}),[er,setEr]=useState({});
+ const set=k=>x=>setF({...f,[k]:x.target.value}),setP=(i,k)=>x=>setF({...f,pf:f.pf.map((p,j)=>j===i?{...p,[k]:x.target.value}:p)});
+ const go=()=>{const v={},sk=f.skills.split(",").map(s=>s.trim()).filter(Boolean);if(f.name.trim().length<2)v.name="Enter a name.";if(!sk.length)v.skills="Add at least one skill.";if(!(+f.price>0))v.price="Enter a price above 0.";if(!(+f.days>=1&&+f.days<=60))v.days="1 to 60 days.";if(f.pf.some(p=>p.u&&!okUrl(p.u)))v.pf="Links must start with https://";setEr(v);if(!Object.keys(v).length)onSave({...f,name:f.name.trim(),skills:sk,price:+f.price,days:+f.days})};
+ return html`<div class="box"><div class="two"><${Fld} l="Display name" err=${er.name}><input value=${f.name} onInput=${set("name")}/><//><${Fld} l="City"><input value=${f.city} onInput=${set("city")}/><//><${Fld} l="Main category"><select value=${f.cat} onChange=${set("cat")}>${CATS.map(c=>html`<option key=${c}>${c}</option>`)}</select><//><${Fld} l="Availability"><select value=${f.avail} onChange=${set("avail")}><option>Available</option><option>Busy</option></select><//><${Fld} l="Starting price (₹)" err=${er.price}><input type="number" value=${f.price} onInput=${set("price")}/><//><${Fld} l="Delivery (days)" err=${er.days}><input type="number" value=${f.days} onInput=${set("days")}/><//></div>
+ <${Fld} l="Skills (comma separated)" err=${er.skills}><input value=${f.skills} onInput=${set("skills")}/><//>
+ ${f.pf.map((p,i)=>html`<div class="two" key=${i}><${Fld} l=${"Portfolio "+(i+1)+" title"}><input value=${p.t} onInput=${setP(i,"t")}/><//><${Fld} l="Link (https://…, optional)"><input value=${p.u} onInput=${setP(i,"u")}/><//></div>`)}${er.pf&&html`<em class="x">${er.pf}</em>`}
+ <p><button class="btn red" onClick=${go}>Save profile (demo)</button></p></div>`;
+}
+/* ===== 5. APP + PAGES ===== */
+function App(){
+ const [pg,setPg]=useState({n:"home"}),[eds,setEds]=useState(E0),[prs,setPrs]=useState(P0),[enq,setEnq]=useState(N0),[rep,setRep]=useState(R0),[tab,setTab]=useState("profiles"),[eid,setEid]=useState("e1"),[toast,setToast]=useState("");
+ const [q,setQ]=useState(""),[cat,setCat]=useState("All"),[skill,setSkill]=useState("All"),[band,setBand]=useState(0);
+ const go=(n,id)=>{setPg({n,id});window.scrollTo(0,0)},say=m=>{setToast(m);setTimeout(()=>setToast(""),2600)};
+ const live=eds.filter(e=>e.status==="approved"),allSk=[...new Set(live.flatMap(e=>e.skills))].sort();
+ const list=live.filter(e=>(cat==="All"||e.cat===cat)&&(skill==="All"||e.skills.includes(skill))&&e.price>=BANDS[band][1]&&e.price<=BANDS[band][2]&&(e.name+e.city+e.cat+e.skills.join(" ")).toLowerCase().includes(q.trim().toLowerCase()));
+ const en=id=>(eds.find(e=>e.id===id)||{}).name||"Editor";
+ const Home=()=>html`<div><div class="hero"><h1>Find the right video editor. <b>Cut</b> the guesswork.</h1><p>Browse demo editors for reels, YouTube, weddings, ads and motion graphics — then post your project.</p><div class="tl"></div>
+  <div class="sb"><input placeholder="Search editors, skills, cities…" value=${q} onInput=${e=>setQ(e.target.value)} onKeyDown=${e=>e.key==="Enter"&&go("find")}/><button class="btn red" onClick=${()=>go("find")}>Search</button></div><button class="btn red" onClick=${()=>{setCat("All");go("find")}}>Find Your Editor →</button></div>
+  <h2>Editing categories</h2><div class="grid cats" style=${{marginTop:10}}>${CATS.map(c=>html`<div class="card cat" key=${c} onClick=${()=>{setCat(c);go("find")}}>${c}</div>`)}</div>
+  <div class="sec"><h2>Featured editors <span class="mut" style=${{fontSize:12}}>(demo)</span></h2></div><div class="grid">${[...live].sort((a,b)=>b.rating-a.rating).slice(0,4).map(e=>html`<${ECard} key=${e.id} e=${e} open=${()=>go("profile",e.id)}/>`)}</div></div>`;
+ const Find=()=>html`<div><h2>Find editors</h2><div class="filt" style=${{margin:"10px 0"}}><input class="w" placeholder="Search name, skill, city…" value=${q} onInput=${e=>setQ(e.target.value)}/><select value=${skill} onChange=${e=>setSkill(e.target.value)}><option value="All">All skills</option>${allSk.map(s=>html`<option key=${s}>${s}</option>`)}</select><select value=${band} onChange=${e=>setBand(+e.target.value)}>${BANDS.map((b,i)=>html`<option key=${i} value=${i}>${b[0]}</option>`)}</select></div>
+  <div class="chips">${["All",...CATS].map(c=>html`<button key=${c} class=${"chip"+(cat===c?" on":"")} onClick=${()=>setCat(c)}>${c}</button>`)}</div>
+  <p class="mut">${list.length} editor(s) · demo profiles</p><div class="grid">${list.map(e=>html`<${ECard} key=${e.id} e=${e} open=${()=>go("profile",e.id)}/>`)}</div>${!list.length&&html`<div class="box">No match. <button class="btn s" onClick=${()=>{setQ("");setCat("All");setSkill("All");setBand(0)}}>Clear filters</button></div>`}</div>`;
+ const Profile=()=>{const e=eds.find(x=>x.id===pg.id);if(!e)return null;return html`<div><button class="btn s" onClick=${()=>go("find")}>← Back</button><div class="pf" style=${{marginTop:12}}><div class="box"><div class="av l">${ini(e.name)}</div><h2 style=${{marginTop:10}}>${e.name}</h2><div class="mut">${e.cat} · ${e.city}</div><p>★ ${e.rating} · <${Pill} s=${e.avail}/></p><p>Starting at <b style=${{fontSize:22}}>${inr(e.price)}</b><br/><span class="mut">Delivery in about ${e.days} day(s)</span></p>
+  <div style=${{display:"grid",gap:8}}><${Contact} id=${e.id}/><button class="btn" onClick=${()=>{setEnq([{id:"n"+Date.now(),e:e.id,t:"General enquiry",st:"Sent"},...enq]);say("Demo enquiry added to Client Dashboard")}}>Send demo enquiry</button><button class="btn" onClick=${()=>{setRep([{id:"r"+Date.now(),about:e.name+" (profile)",why:"Reported from profile (demo)",st:"Open"},...rep]);say("Demo report sent to Admin screen")}}>Report profile</button></div></div>
+  <div><div class="box"><h3>Skills</h3>${e.skills.map(s=>html`<span class="tag" key=${s}>${s}</span>`)}</div><div class="box" style=${{marginTop:12}}><h3 style=${{marginBottom:10}}>Portfolio samples</h3><div class="port">${e.pf.map((p,i)=>html`<div key=${i}><div class="clip">▶<small>${p.u?"linked":"placeholder"}</small></div><div style=${{fontSize:13,marginTop:4}}>${p.t}${okUrl(p.u)&&html` · <a href=${p.u} target="_blank" rel="noopener noreferrer" style=${{color:"var(--blue)"}}>Open ↗</a>`}</div></div>`)}</div></div></div></div></div>`};
+ const Post=()=>html`<div><h2>Post a project</h2><div class="note">Demo: your post appears on the Client Dashboard below as “pending review” and disappears on refresh. Nothing is sent to anyone.</div><${PostForm} onDone=${f=>{setPrs([{id:"j"+Date.now(),...f,st:"Open",rv:"pending"},...prs]);say("Project posted (demo)");go("client")}}/></div>`;
+ const Client=()=>html`<div><h2>Client dashboard <span class="mut" style=${{fontSize:12}}>(demo data)</span></h2><div class="note">No login: this shows sample projects. In production each client would see only their own.</div>
+  <div class="stats">${["Open","In discussion","Hired","Completed"].map(s=>html`<div class="box" key=${s}><b>${prs.filter(p=>p.st===s).length}</b>${s}</div>`)}</div>
+  <div class="box"><h3>My projects</h3>${prs.map(p=>html`<div class="row" key=${p.id}><span><b>${p.t}</b><br/><span class="mut">${p.type} · ${inr(p.budget)} · by ${p.dl}</span></span><span><${Pill} s=${p.st}/> ${p.rv!=="approved"&&html`<${Pill} s=${p.rv} l=${p.rv==="pending"?"under review":p.rv}/>`}</span></div>`)}</div>
+  <div class="box" style=${{marginTop:12}}><h3>Enquiry status</h3>${enq.map(n=>html`<div class="row" key=${n.id}><span>${en(n.e)}<br/><span class="mut">${n.t}</span></span><${Pill} s=${n.st}/></div>`)}</div><p><button class="btn red" onClick=${()=>go("post")}>+ Post a project</button></p></div>`;
+ const Editor=()=>{const e=eds.find(x=>x.id===eid);return html`<div><h2>Editor dashboard <span class="mut" style=${{fontSize:12}}>(demo)</span></h2><div class="note">No login: pick any demo editor to edit. Changes live in this tab only and vanish on refresh.</div><select value=${eid} onChange=${x=>setEid(x.target.value)}>${eds.map(x=>html`<option key=${x.id} value=${x.id}>${x.name}</option>`)}</select><div style=${{height:12}}></div><${EditForm} key=${eid} e=${e} onSave=${f=>{setEds(eds.map(x=>x.id===eid?{...x,...f}:x));say("Profile saved (demo)")}}/></div>`};
+ const Admin=()=>{const T=[["profiles","Profiles"],["listings","Listings"],["reports","Reports"]];return html`<div><h2>Admin dashboard <span class="mut" style=${{fontSize:12}}>(demo)</span></h2><div class="note">Not secure: no admin login exists, so anyone can see this page. Real admin rights need authentication + database rules.</div>
+  <div class="stats"><div class="box"><b>${eds.filter(e=>e.status==="pending").length}</b>Profiles to review</div><div class="box"><b>${prs.filter(p=>p.rv==="pending").length}</b>Listings to review</div><div class="box"><b>${rep.filter(r=>r.st==="Open").length}</b>Open reports</div></div>
+  <div class="chips">${T.map(([k,l])=>html`<button key=${k} class=${"chip"+(tab===k?" on":"")} onClick=${()=>setTab(k)}>${l}</button>`)}</div>
+  <div class="box">${tab==="profiles"&&eds.map(e=>html`<div class="row" key=${e.id}><span>${e.name}<br/><span class="mut">${e.cat} · ${inr(e.price)}</span></span><span><${Pill} s=${e.status}/> <button class="btn s" onClick=${()=>setEds(eds.map(x=>x.id===e.id?{...x,status:"approved"}:x))}>Approve</button> <button class="btn s" onClick=${()=>setEds(eds.map(x=>x.id===e.id?{...x,status:"suspended"}:x))}>Suspend</button></span></div>`)}
+  ${tab==="listings"&&prs.map(p=>html`<div class="row" key=${p.id}><span>${p.t}<br/><span class="mut">${inr(p.budget)} · ${p.type}</span></span><span><${Pill} s=${p.rv}/> <button class="btn s" onClick=${()=>setPrs(prs.map(x=>x.id===p.id?{...x,rv:"approved"}:x))}>Approve</button> <button class="btn s" onClick=${()=>setPrs(prs.map(x=>x.id===p.id?{...x,rv:"removed"}:x))}>Remove</button></span></div>`)}
+  ${tab==="reports"&&rep.map(r=>html`<div class="row" key=${r.id}><span>${r.about}<br/><span class="mut">${r.why}</span></span><span><${Pill} s=${r.st==="Open"?"Open":"approved"} l=${r.st}/> ${r.st==="Open"&&html`<button class="btn s" onClick=${()=>setRep(rep.map(x=>x.id===r.id?{...x,st:"Resolved"}:x))}>Resolve</button> <button class="btn s" onClick=${()=>setRep(rep.map(x=>x.id===r.id?{...x,st:"Dismissed"}:x))}>Dismiss</button>`}</span></div>`)}</div>
+  <p><button class="btn" onClick=${()=>{setEds(E0);setPrs(P0);setEnq(N0);setRep(R0);say("Demo data reset")}}>Reset demo data</button></p></div>`};
+ const NAV=[["home","Home"],["find","Find Editors"],["post","Post Project"],["client","Client"],["editor","Editor"],["admin","Admin"]],cur=pg.n==="profile"?"find":pg.n;
+ return html`<div><div class="demo">DEMO PROTOTYPE · sample data only · not saved, not shared · no real login, messaging, payments or payouts</div>
+ <header><div class="hd"><${Logo} go=${()=>go("home")}/><nav>${NAV.map(([k,l])=>html`<button key=${k} class=${cur===k?"on":""} onClick=${()=>go(k)}>${l}</button>`)}</nav></div></header>
+ <main>${pg.n==="home"&&Home()}${pg.n==="find"&&Find()}${pg.n==="profile"&&Profile()}${pg.n==="post"&&Post()}${pg.n==="client"&&Client()}${pg.n==="editor"&&Editor()}${pg.n==="admin"&&Admin()}</main>
+ <footer>NAVLOOP CLIENTS · demo prototype · prices in ₹ · all people and projects are fictional</footer>${toast&&html`<div class="toast">${toast}</div>`}</div>`;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(html`<${App}/>`);
+</script></body></html>
